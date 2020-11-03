@@ -3,12 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/css/app.css" rel="stylesheet">
+        <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
         <title>{{config('app.name', 'Jela Svijeta')}}</title>
 
     </head>
+    @include('inc.navbar')
     <body class="antialiased">
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </body>
 </html>
