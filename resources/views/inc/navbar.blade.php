@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
         <div>
           <ul class="nav navbar-nav">
-            <li class="pl-3"><a href="/jela">Recepti</a></li>
+            <li class="pl-3"><a href="/jela">Jela</a></li>
             <li class="pl-3"><a href="/sastojci">Sastojci</a></li>
             <li class="pl-3"><a href="/about">About</a></li>
-            <li class="pl-3"><a href="#">Dodaj novo jelo</a></li>
+            <li class="pl-3"><a href="/jela/create">Dodaj novo jelo</a></li>
           </ul>
         </div>
     </div>

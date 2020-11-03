@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\JelaController@index');
-Route::get('/sastojci', 'App\Http\Controllers\JelaController@sastojci');
-Route::get('/about', 'App\Http\Controllers\JelaController@about');
-Route::get('/jela', 'App\Http\Controllers\JelaController@jela');
+Route::get('/', 'App\Http\Controllers\PagesController@index');
+Route::get('/sastojci', 'App\Http\Controllers\PagesController@sastojci');
+Route::get('/about', 'App\Http\Controllers\PagesController@about');
 
+Route::resource('jela', 'App\Http\Controllers\JelaController');

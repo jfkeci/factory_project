@@ -11,6 +11,7 @@
     @include('inc.navbar')
     <body class="antialiased">
         <div class="container">
+            @include('inc.messages')
             @yield('content')
         </div>
     </body>
