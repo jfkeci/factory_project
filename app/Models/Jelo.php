@@ -12,4 +12,8 @@ class Jelo extends Model
 
     public $primaryKey = 'id';
 
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

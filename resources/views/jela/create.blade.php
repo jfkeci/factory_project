@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="pt-3">Nova objava</h1>
+    
+        <h1 class="pt-3">Nova objava</h1>
     {!! Form::open(['action' => 'App\Http\Controllers\JelaController@store', 'method'=>'POST']) !!}
         <div class="form-group">
             {{Form::label('naziv', 'Naziv')}}
@@ -13,4 +14,5 @@
         </div>
         {{Form::submit('Objavi', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
+  
 @endsection

@@ -18,3 +18,6 @@ Route::get('/sastojci', 'App\Http\Controllers\PagesController@sastojci');
 Route::get('/about', 'App\Http\Controllers\PagesController@about');
 
 Route::resource('jela', 'App\Http\Controllers\JelaController');
+Auth::routes();
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');

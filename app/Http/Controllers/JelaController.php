@@ -48,6 +48,7 @@ class JelaController extends Controller
         $jelo=new Jelo;
         $jelo->naziv = $request->input('naziv');
         $jelo->opis = $request->input('opis');
+        $jelo->user_id = auth()->user()->id;
         $jelo->save();
 
         return redirect('/jela')->with('success', 'Uspješno objavljeno');
@@ -73,7 +74,8 @@ class JelaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jelo = Jelo::find($id);
+        return view('jela.edit')->with('jelo', $jelo);
     }
 
     /**
@@ -85,7 +87,16 @@ class JelaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'naziv'=>'required',
+            'opis'=>'required'
+        ]); 
+        $jelo= Jelo::find($id);
+        $jelo->naziv = $request->input('naziv');
+        $jelo->opis = $request->input('opis');
+        $jelo->save();
+
+        return redirect('/jela')->with('success', 'Uspješno uređeno');
     }
 
     /**
@@ -96,6 +107,8 @@ class JelaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $jelo=Jelo::find($id);
+        $jelo->delete();
+        return redirect('/jela')->with('success', 'Uspješno obrisano');
     }
 }
