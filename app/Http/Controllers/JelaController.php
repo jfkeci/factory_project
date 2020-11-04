@@ -7,6 +7,17 @@ use App\Models\Jelo;
 
 class JelaController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -75,6 +86,10 @@ class JelaController extends Controller
     public function edit($id)
     {
         $jelo = Jelo::find($id);
+        //check for correct user
+        if(auth()->user()->id !== $jelo->user_id){
+            return redirect('/jela')->with('error', 'Neovlaštena stranica');
+        }
         return view('jela.edit')->with('jelo', $jelo);
     }
 
@@ -108,6 +123,9 @@ class JelaController extends Controller
     public function destroy($id)
     {
         $jelo=Jelo::find($id);
+        if(auth()->user()->id !== $jelo->user_id){
+            return redirect('/jela')->with('error', 'Neovlaštena stranica');
+        }
         $jelo->delete();
         return redirect('/jela')->with('success', 'Uspješno obrisano');
     }

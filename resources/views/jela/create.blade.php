@@ -14,5 +14,4 @@
         </div>
         {{Form::submit('Objavi', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
-  
 @endsection
