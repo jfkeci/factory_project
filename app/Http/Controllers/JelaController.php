@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Jelo;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class JelaController extends Controller
 {
@@ -54,12 +56,31 @@ class JelaController extends Controller
     {
         $this->validate($request, [
             'naziv'=>'required',
-            'opis'=>'required'
-        ]); 
+            'opis'=>'required',
+            'cover_image'=>'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('cover_image')){
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+		
+	        $thumbStore = 'thumb.'.$filename.'_'.time().'.'.$extension;
+            $thumb = Image::make($request->file('cover_image')->getRealPath());
+            $thumb->resize(80, 80);
+            $thumb->save('storage/cover_images/'.$thumbStore);
+		
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $jelo=new Jelo;
         $jelo->naziv = $request->input('naziv');
         $jelo->opis = $request->input('opis');
         $jelo->user_id = auth()->user()->id;
+        $jelo->cover_image=$fileNameToStore;
         $jelo->save();
 
         return redirect('/jela')->with('success', 'Uspješno objavljeno');
@@ -105,10 +126,28 @@ class JelaController extends Controller
         $this->validate($request, [
             'naziv'=>'required',
             'opis'=>'required'
-        ]); 
+        ]);
+
+        if($request->hasFile('cover_image')){
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+		
+	        $thumbStore = 'thumb.'.$filename.'_'.time().'.'.$extension;
+            $thumb = Image::make($request->file('cover_image')->getRealPath());
+            $thumb->resize(80, 80);
+            $thumb->save('storage/cover_images/'.$thumbStore);
+		
+        }
+
         $jelo= Jelo::find($id);
         $jelo->naziv = $request->input('naziv');
         $jelo->opis = $request->input('opis');
+        if($request->hasFile('cover_image')){
+            $jelo->cover_image = $fileNameToStore;
+        }
         $jelo->save();
 
         return redirect('/jela')->with('success', 'Uspješno uređeno');
@@ -123,9 +162,15 @@ class JelaController extends Controller
     public function destroy($id)
     {
         $jelo=Jelo::find($id);
+
         if(auth()->user()->id !== $jelo->user_id){
             return redirect('/jela')->with('error', 'Neovlaštena stranica');
         }
+
+        if($jelo->cover_image !== 'noimage.jpg'){
+            Storage::delete('/public/cover_images/'.$jelo->cover_image);
+        }
+
         $jelo->delete();
         return redirect('/jela')->with('success', 'Uspješno obrisano');
     }

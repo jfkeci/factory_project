@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Nadzorna ploča</div>
+                <div class="card-header">Filip</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -30,7 +30,7 @@
                                     <td>
                                         {!! Form::open(['action'=>['App\Http\Controllers\JelaController@destroy', $jelo->id], 'method'=>'POST', 'class'=>'pull-right']) !!}
                                             {{Form::hidden('_method', 'DELETE')}}
-                                            {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
+                                            {{Form::submit('Obriši',['class'=>'btn btn-danger'])}}
                                         {!! Form::close() !!}    
                                     </td>
                                 </tr>

@@ -8,6 +8,7 @@
     
     <div class="pt-3 pl-5">
         <h1 class="pt-3"><strong>{{$jelo->naziv}}</strong></h1>
+        <img src="/storage/cover_images/{{$jelo->cover_image}}" alt="">
         <div>
             {{$jelo->opis}}
         </div>

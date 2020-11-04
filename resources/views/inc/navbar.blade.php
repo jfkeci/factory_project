@@ -28,10 +28,7 @@
           <li><a class="pr-5" href="{{ route('register') }}">Register</a></li>
           @else
             <li class="nav-item  pr-2">
-               <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
-            </li>
-            <li class="nav-item  pr-2">
-               <a class="nav-link" href="/dashboard">Dashboard</a>
+               <a class="nav-link" href="/dashboard">{{ Auth::user()->name }}</a>
             </li>
             <li class="nav-item pt-2 pr-5">
                <a lass="nav-link " href="{{ route('logout') }}"
