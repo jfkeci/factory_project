@@ -150,6 +150,14 @@ class JelaController extends Controller
         }
         $jelo->save();
 
+        /* try {
+            //$jelo->opis = null;
+            $jelo->save();
+            return redirect('/jela')->with('success', 'Uspješno spremljeno');
+        } catch (Exception $e) {
+            return redirect('/jela')->with('error', 'Desila se pogreška.' . $e->getMessage());
+        } */
+
         return redirect('/jela')->with('success', 'Uspješno uređeno');
     }
 

@@ -16,4 +16,7 @@ class Jelo extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+    public function sastojci(){
+        return $this->belongsToMany('App\Models\Sastojak', 'jela_sastojci', 'jelo_id', 'sastojak_id')->withTimestamps();
+    }
 }
