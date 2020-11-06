@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,11 +33,15 @@ Route::get('/test', function(){
     \App\Models\Sastojak::create([
         'naziv' => 'vegeta'
     ]); */
-    $sastojak = \App\Models\Sastojak::first();
+    /* $sastojak = \App\Models\Sastojak::first();
     $jelo = \App\Models\Jelo::first();
     //$jelo->sastojci()->attach($sastojak->id); //jelo sa sastojkom u tablicu jela_sastojci
-    $jelo->sastojci()->attach([5,4]);
+    $jelo->sastojci()->attach([5,4]); */
     //dd($jelo);
+    /* $jela = Jelo::with(['user', 'sastojci'])->get();
+    return view() */
+    //$jelo = \App\Models\Jelo::with('sastojci')->first();
+    
 
 
 });

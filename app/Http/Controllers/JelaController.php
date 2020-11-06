@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Jelo;
+use App\Models\Sastojak;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,8 +33,6 @@ class JelaController extends Controller
         //$jelo=Jelo::where('naziv', 'Pomfri')->get();
         $jela = Jelo::orderBy('created_at', 'desc')->paginate(10);
         return view('jela.index')->with('jela', $jela);
-
-        
     }
 
     /**
@@ -43,7 +42,8 @@ class JelaController extends Controller
      */
     public function create()
     {
-        return view('jela.create');
+        $sastojci = Sastojak::orderBy('naziv', 'asc')->get();
+        return view('jela.create')->with('sastojci', $sastojci);
     }
 
     /**
@@ -95,6 +95,7 @@ class JelaController extends Controller
     public function show($id)
     {
         $jelo = Jelo::find($id);
+        /* $sastojci[]=$jelo->sastojci(); */
         return view('jela.show')->with('jelo', $jelo);
     }
 

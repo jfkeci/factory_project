@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategorija extends Model
+class JeloTranslation extends Model
 {
     use HasFactory;
-    public function jela(){
-        return $this->hasMany('App\Models\Jelo');
-    }
 }

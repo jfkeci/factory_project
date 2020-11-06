@@ -40,6 +40,12 @@
                   {{ csrf_field() }}
                </form>
             </li>
+            <li class="nav-item  pr-2">
+               <a class="nav-link" href="#">EN</a>
+            </li>
+            <li class="nav-item  pr-2">
+               <a class="nav-link" href="#">LAT</a>
+            </li>
           @endif
          </ul>
     </div>

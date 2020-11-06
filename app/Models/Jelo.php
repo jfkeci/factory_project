@@ -19,4 +19,7 @@ class Jelo extends Model
     public function sastojci(){
         return $this->belongsToMany('App\Models\Sastojak', 'jela_sastojci', 'jelo_id', 'sastojak_id')->withTimestamps();
     }
+    public function kategorija(){
+        return $this->belongsTo('App\Models\Kategorija');
+    }
 }

@@ -39,7 +39,6 @@
                         @else
                             <p>Nemate objava</p>
                         @endif
-                        
                     </div>
                 </div>
             </div>
