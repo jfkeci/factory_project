@@ -28,9 +28,6 @@ class JelaController extends Controller
      */
     public function index()
     {
-        //$jela = Jelo::orderBy('created_at', 'desc')->get();
-        //po nazivu
-        //$jelo=Jelo::where('naziv', 'Pomfri')->get();
         $jela = Jelo::orderBy('created_at', 'desc')->paginate(10);
         return view('jela.index')->with('jela', $jela);
     }
@@ -42,7 +39,8 @@ class JelaController extends Controller
      */
     public function create()
     {
-        $sastojci = Sastojak::orderBy('naziv', 'asc')->get();
+        $sastojci = Sastojak::all();
+
         return view('jela.create')->with('sastojci', $sastojci);
     }
 
@@ -95,7 +93,6 @@ class JelaController extends Controller
     public function show($id)
     {
         $jelo = Jelo::find($id);
-        /* $sastojci[]=$jelo->sastojci(); */
         return view('jela.show')->with('jelo', $jelo);
     }
 
@@ -108,7 +105,6 @@ class JelaController extends Controller
     public function edit($id)
     {
         $jelo = Jelo::find($id);
-        //check for correct user
         if(auth()->user()->id !== $jelo->user_id){
             return redirect('/jela')->with('error', 'Neovlaštena stranica');
         }

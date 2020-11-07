@@ -13,9 +13,9 @@
     <h4>Sastojci</h4>
     <div>
         @if (count($jelo->sastojci)>0)
-            <ul>
+            <ul style="list-style-type:none;">
                 @foreach ($jelo->sastojci as $sastojak)
-                <li>{{$sastojak->naziv}}</li>
+                <li><a href="/sastojci/{{$sastojak->id}}">{{$sastojak->naziv}}</a></li>
                 @endforeach
             </ul>
         @else

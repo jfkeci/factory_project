@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Sastojak;
+use App\Models\Jelo;
+use App\Models\Kategorija;
 
 
 /*
@@ -15,33 +18,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\PagesController@index');
-Route::get('/sastojci', 'App\Http\Controllers\PagesController@sastojci');
 Route::get('/about', 'App\Http\Controllers\PagesController@about');
 
 Route::resource('jela', 'App\Http\Controllers\JelaController');
+Route::resource('sastojci', 'App\Http\Controllers\SastojciController');
+Route::resource('kategorije', 'App\Http\Controllers\kategorijeController');
 Auth::routes();
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index');
 
 Route::get('/test', function(){
-    /* \App\Models\Sastojak::create([
-        'naziv' => 'sol'
-    ]);
-    \App\Models\Sastojak::create([
-        'naziv' => 'papar'
-    ]);
-    \App\Models\Sastojak::create([
-        'naziv' => 'vegeta'
-    ]); */
-    /* $sastojak = \App\Models\Sastojak::first();
-    $jelo = \App\Models\Jelo::first();
-    //$jelo->sastojci()->attach($sastojak->id); //jelo sa sastojkom u tablicu jela_sastojci
-    $jelo->sastojci()->attach([5,4]); */
-    //dd($jelo);
-    /* $jela = Jelo::with(['user', 'sastojci'])->get();
-    return view() */
-    //$jelo = \App\Models\Jelo::with('sastojci')->first();
-    
-
-
+    /* $sastojak = Sastojak::find(32);
+    $jelo = Jelo::find(20);
+    $jelo->sastojci()->attach($sastojak->id); */
+    $sastojak = Sastojak::find(32);
+    $jela = Jelo::all();
+    $jela_id = $sastojak->jela();
+    $arr = [];
+    foreach($jela_id as $id){
+        foreach($jela as $jelo){
+            if($id == $jelo->id){
+                array_push($arr, $jelo);
+            }
+        }
+    }
+    dd($arr);
 });
